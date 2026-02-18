@@ -8,26 +8,15 @@ const stressEl = document.getElementById('stress');
 const confidenceEl = document.getElementById('confidence');
 const focusEl = document.getElementById('focus');
 
-const promptPlanBtn = document.getElementById('prompt-plan');
-const promptRevisionBtn = document.getElementById('prompt-revision');
-const showResourcesBtn = document.getElementById('show-resources');
-
 const state = {
   messages: [
     {
       role: 'assistant',
       content:
-        "Hi, I'm Dcon. I'll support both emotional resilience and CA exam preparation. We will stay practical: understand what you're feeling, then convert it into small wins.",
+        "Hi. I'm here to listen carefully and help you break emotions into clear thoughts and next steps. You are allowed to feel overwhelmed, and we can still move forward one step at a time.",
     },
   ],
-  resources: null,
 };
-
-async function loadResources() {
-  const response = await fetch('data/ca_india_resources_2026.json');
-  if (!response.ok) throw new Error('Could not load local CA resources file');
-  state.resources = await response.json();
-}
 
 function render() {
   chatEl.innerHTML = '';
@@ -49,36 +38,19 @@ function getCheckin() {
   };
 }
 
-function getApprovedResources() {
-  if (!state.resources) return [];
-  return state.resources.resources.filter((item) => item?.model_review?.status === 'approved');
-}
-
-function buildKnowledgeSnippet() {
-  const approved = getApprovedResources();
-  if (!approved.length) return 'No model-approved CA resources currently available.';
-  return approved
-    .map((item) => `${item.id}: ${item.title} | ${item.url} | ${item.purpose}`)
-    .join('\n');
-}
-
 async function chatWithOllama(messages, model) {
   const checkin = getCheckin();
-  const knowledge = buildKnowledgeSnippet();
 
   const systemPrompt = `
-You are Dcon, a dual-purpose assistant:
-A) emotional reflection coach for confidence rebuilding,
-B) CA-India preparation copilot.
+You are a supportive reflective coach for a woman rebuilding confidence after family conflict and career delay.
 
-Rules:
-1) Always validate distress with respect; never dismiss the problem.
-2) For study help, prioritize verified local knowledge base references provided below.
-3) Never invent ICAI rules, dates, exemptions, or procedures.
-4) If unsure, explicitly say uncertainty and ask the user to verify on official portals.
-5) When using resources, cite resource IDs in brackets, e.g. [ICAI_EXAM_PORTAL].
-6) For planning, give actionable output: timetable blocks, revision sequence, and today's top 3 tasks.
-7) If signs of self-harm appear, advise immediate emergency support + trusted person.
+Goals:
+1) Validate struggle without giving empty reassurance.
+2) Identify likely patterns: shame, comparison, perfectionism, all-or-nothing thinking, fear of being behind.
+3) Ask one focused follow-up question when needed.
+4) End with 1-3 concrete actions for the next 24 hours.
+5) Never say "no issue" if distress exists.
+6) If signs of self-harm appear, urge immediate emergency help and trusted-person contact.
 
 Current check-in:
 - sleep: ${checkin.sleep}/10
@@ -86,9 +58,8 @@ Current check-in:
 - confidence: ${checkin.confidence}/10
 - focus: ${checkin.focus}/10
 
-Verified CA knowledge base entries:
-${knowledge}
-`;
+Keep tone warm, respectful, and practical.
+`; 
 
   const response = await fetch('http://localhost:11434/api/chat', {
     method: 'POST',
@@ -97,48 +68,27 @@ ${knowledge}
       model,
       stream: false,
       messages: [{ role: 'system', content: systemPrompt }, ...messages],
-      options: { temperature: 0.4 },
+      options: {
+        temperature: 0.5,
+      },
     }),
   });
 
-  if (!response.ok) throw new Error(`Ollama error: ${response.status}`);
+  if (!response.ok) {
+    throw new Error(`Ollama error: ${response.status}`);
+  }
+
   const data = await response.json();
   return data.message?.content || 'I could not generate a response right now.';
 }
-
-function addUserPrompt(text) {
-  messageEl.value = text;
-  messageEl.focus();
-}
-
-promptPlanBtn.addEventListener('click', () => {
-  addUserPrompt('Build me a 7-day CA study timetable that is realistic with stress recovery and confidence rebuilding.');
-});
-
-promptRevisionBtn.addEventListener('click', () => {
-  addUserPrompt('Create a quick revision sheet format for today: topics, formulas/sections, expected mistakes, and 30-minute revision loops.');
-});
-
-showResourcesBtn.addEventListener('click', () => {
-  if (!state.resources) return;
-  const approved = getApprovedResources();
-  const intro = {
-    role: 'assistant',
-    content:
-      'Here are CA references currently model-approved in Dcon (stored locally in this repo):\n' +
-      approved
-        .map((item) => `- [${item.id}] ${item.title} — ${item.url}`)
-        .join('\n'),
-  };
-  state.messages.push(intro);
-  render();
-});
 
 composer.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const text = messageEl.value.trim();
-  if (!text) return;
+  if (!text) {
+    return;
+  }
 
   state.messages.push({ role: 'user', content: text });
   render();
@@ -154,34 +104,20 @@ composer.addEventListener('submit', async (event) => {
       model
     );
 
-    state.messages[state.messages.length - 1] = { role: 'assistant', content: reply };
+    state.messages[state.messages.length - 1] = {
+      role: 'assistant',
+      content: reply,
+    };
     render();
   } catch (error) {
     state.messages[state.messages.length - 1] = {
       role: 'assistant',
       content:
-        'I could not connect to Ollama at http://localhost:11434. Start Ollama and ensure the model is installed (default: llama3.1:8b).',
+        'I could not connect to Ollama at http://localhost:11434. Please start Ollama and make sure the selected model is installed.',
     };
     render();
     console.error(error);
   }
 });
 
-loadResources()
-  .then(() => {
-    const approvedCount = getApprovedResources().length;
-    if (!approvedCount) {
-      state.messages.push({
-        role: 'assistant',
-        content: 'CA resources loaded, but none are model-approved yet. Run scripts/review_ca_resources_with_ollama.py first.',
-      });
-    }
-    render();
-  })
-  .catch(() => {
-    state.messages.push({
-      role: 'assistant',
-      content: 'Warning: local CA resource file could not be loaded. Study answers will be limited.',
-    });
-    render();
-  });
+render();

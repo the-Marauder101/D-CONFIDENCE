@@ -1,21 +1,33 @@
-# Dcon
+# D-CONFIDENCE
 
-Dcon is a private, low-cost, local web assistant for:
+A private, low-cost, chat-style support web app intended for reflective coaching and emotional support.
 
-1. emotional reflection and confidence rebuilding, and
-2. India CA exam preparation support.
+> This tool is **not a medical diagnosis system** and should not replace licensed mental-health care. It helps with structured reflection, emotional labeling, and action planning.
 
-> Dcon is not a medical diagnosis system and does not replace licensed mental-health professionals.
+## Why this exists
 
-## Direct answers to your questions
+This app is designed for someone who feels "behind" in life despite having fought through hard circumstances. It aims to:
 
-### 1) Llama or Kimi 2.5?
-Default remains **Llama via Ollama** (`llama3.1:8b`) for local/private use and zero cloud token billing by default.
+- validate effort and resilience without empty reassurance,
+- identify thinking patterns (self-criticism, comparison, all-or-nothing thinking),
+- convert emotional overwhelm into small, concrete action steps.
 
-### 2) How do I view the website now? Public link?
-Currently this project runs locally; no public link is created by default.
+## Cost strategy (near-zero API spend)
 
-Run:
+Use a **local model** through [Ollama](https://ollama.com/):
+
+1. Install Ollama.
+2. Pull a model (example):
+   ```bash
+   ollama pull llama3.1:8b
+   ```
+3. Start Ollama (usually runs at `http://localhost:11434`).
+
+The app in this repo calls Ollama directly from the browser, so there are no per-token cloud API charges.
+
+## Run the website
+
+From this folder:
 
 ```bash
 python3 -m http.server 8000
@@ -25,52 +37,19 @@ Open:
 
 - `http://localhost:8000`
 
-### 3) Why did you see "could not connect to Ollama"?
-Because the website frontend works independently, but chat responses require a running local Ollama server at `http://localhost:11434`.
+## Features
 
-So previous UI/testing steps were valid for website rendering, but **LLM chat requires Ollama running**.
+- Chat-style conversation UI.
+- "Reflection mode" system prompt to avoid shallow, dismissive replies.
+- Optional quick check-in fields (sleep, stress, confidence, focus).
+- A visible safety note with immediate-help guidance.
 
-## CA Final resources (local registry)
+## Important safety guidance
 
-File:
+If there is any risk of self-harm or harm to others, seek immediate emergency support in your local area.
 
-- `data/ca_india_resources_2026.json`
+For better outcomes, combine this app with:
 
-Now includes explicit CA Final-focused entries (study material host, RTP, MTP, PYQ/suggested answers, exam notifications, application workflows) and formal sources.
-
-## Model-review workflow (your "Llama must read first" requirement)
-
-Dcon now supports a two-step pipeline:
-
-1. Structural verification:
-   ```bash
-   python3 scripts/verify_ca_resources.py
-   ```
-2. Llama review + approval stamping:
-   ```bash
-   python3 scripts/review_ca_resources_with_ollama.py --model llama3.1:8b
-   ```
-
-Only entries marked `model_review.status = approved` are used by Dcon chat context.
-
-## Full local setup
-
-1. Install Ollama.
-2. Pull model:
-   ```bash
-   ollama pull llama3.1:8b
-   ```
-3. Start Ollama (keeps API on `http://localhost:11434`).
-4. Review and approve references:
-   ```bash
-   python3 scripts/review_ca_resources_with_ollama.py --model llama3.1:8b
-   ```
-5. Start Dcon site:
-   ```bash
-   python3 -m http.server 8000
-   ```
-6. Open `http://localhost:8000`.
-
-## Safety guidance
-
-If there is any risk of self-harm or harm to others, seek immediate emergency support and contact a trusted person immediately.
+- one trusted human supporter,
+- a weekly study plan,
+- and (ideally) a qualified therapist/counselor for deeper trauma and confidence rebuilding.
