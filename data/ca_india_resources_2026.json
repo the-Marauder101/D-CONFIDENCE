@@ -1,0 +1,218 @@
+{
+  "version": "2026.2",
+  "last_updated": "2026-02-18",
+  "policy": {
+    "allowed_domains": [
+      "icai.org",
+      "eservices.icai.org",
+      "selfservice.icai.org",
+      "icaiexam.icai.org",
+      "boslive.icai.org",
+      "cds.icai.org",
+      "resource.cdn.icai.org",
+      "mca.gov.in",
+      "incometax.gov.in",
+      "cbic.gov.in",
+      "egazette.gov.in",
+      "indiacode.nic.in",
+      "swayam.gov.in",
+      "nptel.ac.in"
+    ],
+    "double_verification_rule": "A reference is usable only if (1) its domain is allowed, (2) it is cross-verified with another official source, and (3) model_review.status is approved.",
+    "model_review_rule": "Run scripts/review_ca_resources_with_ollama.py after edits. Only entries with model_review.status=approved should be surfaced to the chat assistant."
+  },
+  "resources": [
+    {
+      "id": "ICAI_MAIN",
+      "title": "The Institute of Chartered Accountants of India (Official)",
+      "url": "https://www.icai.org/",
+      "type": "official_body",
+      "purpose": "Primary source for notifications, announcements, exam-related circulars, and student updates.",
+      "audience": ["all_levels"],
+      "verification": {"cross_verified_with": ["ICAI_EXAM_PORTAL"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "ICAI_EXAM_PORTAL",
+      "title": "ICAI Examination Portal",
+      "url": "https://icaiexam.icai.org/",
+      "type": "exam_portal",
+      "purpose": "Exam forms, exam announcements, and exam services.",
+      "audience": ["all_levels"],
+      "verification": {"cross_verified_with": ["ICAI_MAIN"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "ICAI_BOS",
+      "title": "Board of Studies (BoS) Knowledge Portal",
+      "url": "https://boslive.icai.org/",
+      "type": "study_material",
+      "purpose": "Learning portal for academic content and student support material.",
+      "audience": ["all_levels"],
+      "verification": {"cross_verified_with": ["ICAI_MAIN"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "ICAI_CDS",
+      "title": "ICAI CDS Portal",
+      "url": "https://cds.icai.org/",
+      "type": "study_material",
+      "purpose": "Distribution and access point for ICAI publications/material.",
+      "audience": ["all_levels"],
+      "verification": {"cross_verified_with": ["ICAI_BOS"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+
+    {
+      "id": "CA_FINAL_STUDY_MATERIAL",
+      "title": "CA Final: Study Material (ICAI official publication host)",
+      "url": "https://resource.cdn.icai.org/",
+      "type": "ca_final_core",
+      "purpose": "Official host for ICAI PDF publications including CA Final modules and updates.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["ICAI_CDS", "ICAI_BOS"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "CA_FINAL_RTP",
+      "title": "CA Final RTP (Revision Test Papers) via ICAI publications",
+      "url": "https://resource.cdn.icai.org/",
+      "type": "ca_final_practice",
+      "purpose": "RTP resources for exam-cycle revision practice.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["ICAI_BOS", "ICAI_EXAM_PORTAL"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "CA_FINAL_MTP",
+      "title": "CA Final MTP (Mock Test Papers) via ICAI publications",
+      "url": "https://resource.cdn.icai.org/",
+      "type": "ca_final_practice",
+      "purpose": "Mock exam resources for time-bound paper practice.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["ICAI_BOS", "ICAI_EXAM_PORTAL"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "CA_FINAL_PYQ",
+      "title": "CA Final past question papers & suggested answers (ICAI)",
+      "url": "https://resource.cdn.icai.org/",
+      "type": "ca_final_practice",
+      "purpose": "Past papers and suggested answers for pattern familiarity.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["ICAI_EXAM_PORTAL", "ICAI_BOS"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "CA_FINAL_EXAM_NOTIFICATIONS",
+      "title": "CA Final exam notifications and announcements",
+      "url": "https://www.icai.org/",
+      "type": "ca_final_admin",
+      "purpose": "Exam cycle notices, scheduling notices, correction windows, and official announcements.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["ICAI_EXAM_PORTAL"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "CA_FINAL_APPLICATION_WORKFLOW",
+      "title": "CA Final application workflow and service actions",
+      "url": "https://eservices.icai.org/",
+      "type": "ca_final_admin",
+      "purpose": "Service/login workflows that support student lifecycle actions.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["ICAI_EXAM_PORTAL", "ICAI_MAIN"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+
+    {
+      "id": "ICAI_ESERVICES",
+      "title": "ICAI e-Services",
+      "url": "https://eservices.icai.org/",
+      "type": "student_portal",
+      "purpose": "Student login/service workflows and profile-linked services.",
+      "audience": ["all_levels"],
+      "verification": {"cross_verified_with": ["ICAI_MAIN"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "ICAI_SSP",
+      "title": "ICAI Self Service Portal (SSP)",
+      "url": "https://selfservice.icai.org/",
+      "type": "student_portal",
+      "purpose": "Student/member self-service workflows.",
+      "audience": ["all_levels"],
+      "verification": {"cross_verified_with": ["ICAI_ESERVICES"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "MCA",
+      "title": "Ministry of Corporate Affairs (Government of India)",
+      "url": "https://www.mca.gov.in/",
+      "type": "law_regulatory",
+      "purpose": "Companies Act updates and corporate law references.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["INDIACODE"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "INCOMETAX_PORTAL",
+      "title": "Income Tax Department Portal (Government of India)",
+      "url": "https://www.incometax.gov.in/",
+      "type": "law_regulatory",
+      "purpose": "Income-tax circulars/updates and utility references.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["INDIACODE"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "CBIC",
+      "title": "CBIC (Indirect Tax / GST official)",
+      "url": "https://www.cbic.gov.in/",
+      "type": "law_regulatory",
+      "purpose": "GST/indirect tax notifications and circular references.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["INDIACODE"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "INDIACODE",
+      "title": "India Code",
+      "url": "https://www.indiacode.nic.in/",
+      "type": "law_reference",
+      "purpose": "Consolidated statutory text references.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["EGAZETTE"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "EGAZETTE",
+      "title": "e-Gazette (Government Notifications)",
+      "url": "https://egazette.gov.in/",
+      "type": "law_reference",
+      "purpose": "Gazette notifications for legal authenticity checks.",
+      "audience": ["ca_final"],
+      "verification": {"cross_verified_with": ["INDIACODE"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "SWAYAM",
+      "title": "SWAYAM",
+      "url": "https://swayam.gov.in/",
+      "type": "open_course",
+      "purpose": "Open online courses for foundational strengthening and study skills.",
+      "audience": ["all_levels"],
+      "verification": {"cross_verified_with": ["NPTEL"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    },
+    {
+      "id": "NPTEL",
+      "title": "NPTEL",
+      "url": "https://nptel.ac.in/",
+      "type": "open_course",
+      "purpose": "Open lecture courses for quantitative and conceptual reinforcement.",
+      "audience": ["all_levels"],
+      "verification": {"cross_verified_with": ["SWAYAM"], "status": "verified"},
+      "model_review": {"status": "pending", "reviewed_at": null, "model": null, "notes": ""}
+    }
+  ]
+}
