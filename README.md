@@ -1,25 +1,33 @@
-# Dcon
+# D-CONFIDENCE
 
-Dcon is a private, low-cost, chat-style web assistant for:
+A private, low-cost, chat-style support web app intended for reflective coaching and emotional support.
 
-1. emotional reflection and confidence rebuilding, and
-2. India CA exam preparation support.
+> This tool is **not a medical diagnosis system** and should not replace licensed mental-health care. It helps with structured reflection, emotional labeling, and action planning.
 
-> Dcon is **not** a medical diagnosis system and does not replace licensed mental-health professionals.
+## Why this exists
 
-## Llama vs Kimi 2.5 (recommended default)
+This app is designed for someone who feels "behind" in life despite having fought through hard circumstances. It aims to:
 
-For this project goal (private + low cost + local control), **Llama via Ollama** is the better default.
+- validate effort and resilience without empty reassurance,
+- identify thinking patterns (self-criticism, comparison, all-or-nothing thinking),
+- convert emotional overwhelm into small, concrete action steps.
 
-- **Default chosen**: `llama3.1:8b`
-- Why: local inference, no per-token cloud billing, private data stays on your machine, simple setup.
-- Kimi 2.5 can be strong, but usually requires external hosted API usage and account/billing dependency.
+## Cost strategy (near-zero API spend)
 
-## Does this website have a public link right now?
+Use a **local model** through [Ollama](https://ollama.com/):
 
-No. By default it runs locally on your machine.
+1. Install Ollama.
+2. Pull a model (example):
+   ```bash
+   ollama pull llama3.1:8b
+   ```
+3. Start Ollama (usually runs at `http://localhost:11434`).
 
-To view now:
+The app in this repo calls Ollama directly from the browser, so there are no per-token cloud API charges.
+
+## Run the website
+
+From this folder:
 
 ```bash
 python3 -m http.server 8000
@@ -29,51 +37,19 @@ Open:
 
 - `http://localhost:8000`
 
-If you want public access later, you can deploy static files (e.g., GitHub Pages) **but** chat will not work there unless you also deploy a secure backend that can reach a model endpoint.
+## Features
 
-## CA Knowledge Base (2026 curated registry)
+- Chat-style conversation UI.
+- "Reflection mode" system prompt to avoid shallow, dismissive replies.
+- Optional quick check-in fields (sleep, stress, confidence, focus).
+- A visible safety note with immediate-help guidance.
 
-Dcon now includes a local CA resource registry in:
+## Important safety guidance
 
-- `data/ca_india_resources_2026.json`
+If there is any risk of self-harm or harm to others, seek immediate emergency support in your local area.
 
-It contains official and formal references (ICAI portals + government legal sources + open course sources) with a local double-verification policy:
+For better outcomes, combine this app with:
 
-1. domain allowlist validation, and
-2. cross-verification reference to another official source.
-
-### Validate knowledge-base integrity
-
-```bash
-python3 scripts/verify_ca_resources.py
-```
-
-This validates structural authenticity rules for every resource entry.
-
-## Run with local model (no cloud token spend)
-
-1. Install Ollama.
-2. Pull model:
-   ```bash
-   ollama pull llama3.1:8b
-   ```
-3. Run Ollama (default on `http://localhost:11434`).
-4. Start Dcon static site:
-   ```bash
-   python3 -m http.server 8000
-   ```
-5. Open `http://localhost:8000`.
-
-## Dcon behavior controls
-
-Dcon is configured to:
-
-- avoid dismissive emotional responses,
-- avoid inventing ICAI procedures/dates,
-- prioritize local verified CA references,
-- show uncertainty if evidence is insufficient,
-- produce actionable timetables and quick revision outputs.
-
-## Safety guidance
-
-If there is any risk of self-harm or harm to others, seek immediate emergency support in your local area and contact a trusted person immediately.
+- one trusted human supporter,
+- a weekly study plan,
+- and (ideally) a qualified therapist/counselor for deeper trauma and confidence rebuilding.

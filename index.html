@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dcon | Confidence + CA Prep Copilot</title>
+    <title>D-CONFIDENCE | Reflective Support Chat</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="app">
       <header>
-        <h1>Dcon</h1>
-        <p class="subtitle">Psychological support + India CA prep copilot (local, private, low-cost)</p>
+        <h1>D-CONFIDENCE</h1>
+        <p class="subtitle">Private reflective support chat (local model, low cost)</p>
       </header>
 
       <section class="notice">
-        <strong>Safety:</strong> Dcon is a reflective support and study assistant, not medical diagnosis.
+        <strong>Safety:</strong> This tool is for reflection and emotional support, not medical diagnosis.
         If there is immediate danger, contact local emergency services.
       </section>
 
@@ -28,19 +28,18 @@
         </div>
       </section>
 
-      <section class="toolbar">
-        <button id="prompt-plan" type="button">Create weekly CA timetable</button>
-        <button id="prompt-revision" type="button">Make quick revision sheet</button>
-        <button id="show-resources" type="button">Show verified CA resources</button>
-      </section>
-
       <section id="chat" class="chat" aria-live="polite"></section>
 
       <form id="composer" class="composer">
-        <textarea id="message" placeholder="Type how you're feeling or what you need for CA prep..." rows="3" required></textarea>
+        <textarea
+          id="message"
+          placeholder="Type how you're feeling..."
+          rows="3"
+          required
+        ></textarea>
         <div class="controls">
           <label>
-            Local model (default)
+            Ollama model
             <input id="model" type="text" value="llama3.1:8b" />
           </label>
           <button type="submit">Send</button>
