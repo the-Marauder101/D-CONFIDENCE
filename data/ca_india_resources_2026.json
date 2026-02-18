@@ -1,0 +1,193 @@
+{
+  "version": "2026.1",
+  "last_updated": "2026-02-18",
+  "policy": {
+    "allowed_domains": [
+      "icai.org",
+      "eservices.icai.org",
+      "selfservice.icai.org",
+      "icaiexam.icai.org",
+      "boslive.icai.org",
+      "cds.icai.org",
+      "resource.cdn.icai.org",
+      "mca.gov.in",
+      "incometax.gov.in",
+      "cbic.gov.in",
+      "egazette.gov.in",
+      "indiacode.nic.in",
+      "swayam.gov.in",
+      "nptel.ac.in"
+    ],
+    "double_verification_rule": "A reference is usable only if (1) its domain is allowed and (2) it is confirmed by a second independent official source or ICAI announcement."
+  },
+  "resources": [
+    {
+      "id": "ICAI_MAIN",
+      "title": "The Institute of Chartered Accountants of India (Official)",
+      "url": "https://www.icai.org/",
+      "type": "official_body",
+      "purpose": "Primary source for notifications, announcements, exam-related circulars, and student updates.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["ICAI_EXAM_PORTAL"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "ICAI_EXAM_PORTAL",
+      "title": "ICAI Examination Portal",
+      "url": "https://icaiexam.icai.org/",
+      "type": "exam_portal",
+      "purpose": "Exam forms, admit card/process pages, and exam announcements.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["ICAI_MAIN"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "ICAI_ESERVICES",
+      "title": "ICAI e-Services",
+      "url": "https://eservices.icai.org/",
+      "type": "student_portal",
+      "purpose": "Student login/service workflows and profile-linked services.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["ICAI_MAIN"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "ICAI_SSP",
+      "title": "ICAI Self Service Portal (SSP)",
+      "url": "https://selfservice.icai.org/",
+      "type": "student_portal",
+      "purpose": "Student/Member self-service actions and administrative workflows.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["ICAI_ESERVICES"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "ICAI_BOS",
+      "title": "Board of Studies (BoS) Knowledge Portal",
+      "url": "https://boslive.icai.org/",
+      "type": "study_material",
+      "purpose": "Study support, lectures, and student learning resources.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["ICAI_MAIN"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "ICAI_CDS",
+      "title": "ICAI Centralized Distribution System (CDS)",
+      "url": "https://cds.icai.org/",
+      "type": "study_material",
+      "purpose": "ICAI publications and study material ordering/distribution.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["ICAI_BOS"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "ICAI_RESOURCE_CDN",
+      "title": "ICAI Publication CDN",
+      "url": "https://resource.cdn.icai.org/",
+      "type": "document_host",
+      "purpose": "Hosts official ICAI PDFs (notifications, modules, publications).",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["ICAI_MAIN"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "MCA",
+      "title": "Ministry of Corporate Affairs (Government of India)",
+      "url": "https://www.mca.gov.in/",
+      "type": "law_regulatory",
+      "purpose": "Companies Act updates, corporate law notifications, and compliance references.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["INDIACODE"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "INCOMETAX_PORTAL",
+      "title": "Income Tax Department Portal (Government of India)",
+      "url": "https://www.incometax.gov.in/",
+      "type": "law_regulatory",
+      "purpose": "Income-tax updates, circular context, and taxpayer utilities.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["INDIACODE"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "CBIC",
+      "title": "CBIC (Indirect Tax / GST official)",
+      "url": "https://www.cbic.gov.in/",
+      "type": "law_regulatory",
+      "purpose": "GST and indirect tax notifications and circular references.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["INDIACODE"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "INDIACODE",
+      "title": "India Code",
+      "url": "https://www.indiacode.nic.in/",
+      "type": "law_reference",
+      "purpose": "Official consolidated acts and statutory text references.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["EGAZETTE"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "EGAZETTE",
+      "title": "e-Gazette (Government Notifications)",
+      "url": "https://egazette.gov.in/",
+      "type": "law_reference",
+      "purpose": "Gazette notifications for legal authenticity checks.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["INDIACODE"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "SWAYAM",
+      "title": "SWAYAM",
+      "url": "https://swayam.gov.in/",
+      "type": "open_course",
+      "purpose": "Open online courses for accounting, commerce, math, and study skills.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["NPTEL"],
+        "status": "verified"
+      }
+    },
+    {
+      "id": "NPTEL",
+      "title": "NPTEL",
+      "url": "https://nptel.ac.in/",
+      "type": "open_course",
+      "purpose": "Open lecture courses that can supplement CA foundations and discipline-building.",
+      "verification": {
+        "domain_check": true,
+        "cross_verified_with": ["SWAYAM"],
+        "status": "verified"
+      }
+    }
+  ]
+}
